@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fiados_postgres_sandbox
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: fiados_dev
+      POSTGRES_PASSWORD: fiados_sandbox_local
+      POSTGRES_DB: fiados_sandbox
+    ports:
+      - "5432:5432"
+    volumes:
+      - fiados_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fiados_dev -d fiados_sandbox"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: fiados_redis_sandbox
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  fiados_pgdata:
