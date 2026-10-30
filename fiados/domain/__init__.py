@@ -15,17 +15,33 @@ from fiados.domain.exceptions import (
     RiskPolicyViolationError,
     SignatureVerificationError,
 )
+from fiados.domain.models import (
+    Address,
+    AmortizationSchedule,
+    DigitalPromissoryNote,
+    Installment,
+    Party,
+    StateTransitionRecord,
+    Transaction,
+)
 
 __all__ = [
+    "Address",
     "AmortizationMethod",
+    "AmortizationSchedule",
     "Currency",
+    "DigitalPromissoryNote",
     "FiadosError",
     "HashChainIntegrityError",
+    "Installment",
     "InstrumentFormalizationError",
     "InstrumentStatus",
     "InvalidStateTransitionError",
+    "Party",
     "RiskDecision",
     "RiskPolicyViolationError",
     "SignatureVerificationError",
+    "StateTransitionRecord",
+    "Transaction",
     "TransactionState",
 ]
