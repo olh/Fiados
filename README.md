@@ -30,27 +30,27 @@ Fiados employs a clean, modular event-driven architecture that separates merchan
 
 ```mermaid
 flowchart TD
-    subgraph ClientLayer ["1. Integration & Checkout Layer"]
-        A[Merchant E-Commerce / POS] -->|REST API / SDK| B(Fiados API Gateway)
-        B -->|Async Events| C(Webhook Dispatcher)
+    subgraph ClientLayer ["1. Integration and Checkout Layer"]
+        A["Merchant E-Commerce / POS"] -->|"REST API / SDK"| B["Fiados API Gateway"]
+        B -->|"Async Events"| C["Webhook Dispatcher"]
     end
 
     subgraph CoreEngine ["2. Fiados Core Orchestration Engine"]
-        B --> D[Transaction State Machine]
-        D -->|1. Request Evaluation| E[Risk & KYC Orchestrator]
-        D -->|2. Formalize Agreement| F[Legal Instrument Engine]
-        D -->|3. Register Obligation| G[Receivables Ledger]
+        B --> D["Transaction State Machine"]
+        D -->|"1. Request Evaluation"| E["Risk and KYC Orchestrator"]
+        D -->|"2. Formalize Agreement"| F["Legal Instrument Engine"]
+        D -->|"3. Register Obligation"| G["Receivables Ledger"]
     end
 
     subgraph ServiceProviders ["3. Pluggable Adapters (SPI)"]
-        E -.-> H[(Synthetic Mocks / Custom KYC)]
-        F -.-> I[Digital Promissory Note Generator]
-        F -.-> J[Electronic Signature Provider]
-        G -.-> K[(PostgreSQL Audit Log)]
-        D -.-> L[(Redis Event Cache)]
+        E -.-> H[("Synthetic Mocks / Custom KYC")]
+        F -.-> I["Digital Promissory Note Generator"]
+        F -.-> J["Electronic Signature Provider"]
+        G -.-> K[("PostgreSQL Audit Log")]
+        D -.-> L[("Redis Event Cache")]
     end
 
-    C -->|Idempotent Webhooks (HMAC)| A
+    C -->|"Idempotent Webhooks (HMAC)"| A
 ```
 
 ---
@@ -58,8 +58,8 @@ flowchart TD
 ## ✨ Features
 
 - **Deterministic Transaction State Machine:**  
-  A strict finite-state machine (FSM) enforcing idempotent lifecycle transitions:
-  $$\text{DRAFT} \longrightarrow \text{EVALUATING} \longrightarrow \text{FORMALIZED} \longrightarrow \text{ACTIVE} \longrightarrow \text{SETTLED / DEFAULTED}$$
+  A strict finite-state machine (FSM) enforcing idempotent lifecycle transitions:  
+  `DRAFT` $\rightarrow$ `EVALUATING` $\rightarrow$ `FORMALIZED` $\rightarrow$ `ACTIVE` $\rightarrow$ `SETTLED / DEFAULTED`
 
 - **Digital Promissory Note Generation:**  
   Programmatic compilation of formal credit titles with embedded SHA-256 checksums, issuer/debtor credentials, clear amortization tables, and immutable evidence logs.
